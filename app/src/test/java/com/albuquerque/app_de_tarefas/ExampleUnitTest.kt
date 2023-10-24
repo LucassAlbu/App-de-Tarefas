@@ -1,4 +1,4 @@
-package com.Albuquerque.app_de_tarefas
+package com.albuquerque.app_de_tarefas
 
 import org.junit.Test
 

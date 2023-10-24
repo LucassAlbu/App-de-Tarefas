@@ -1,4 +1,4 @@
-package com.Albuquerque.app_de_tarefas
+package com.albuquerque.app_de_tarefas
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
