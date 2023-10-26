@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.albuquerque.app_de_tarefas.databinding.RecoverPasswordFragmentBinding
+import com.albuquerque.app_de_tarefas.util.initToolbar
 
 class RecoverPasswordFragment : Fragment() {
 
@@ -17,5 +18,10 @@ class RecoverPasswordFragment : Fragment() {
     ): View? {
         _binding = RecoverPasswordFragmentBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolbar)
     }
 }
