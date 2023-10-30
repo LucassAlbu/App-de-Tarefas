@@ -42,7 +42,7 @@ class RecoverPasswordFragment : Fragment() {
         if (email.isNotEmpty()) {
             Toast.makeText(requireContext(), "Tudo certo", Toast.LENGTH_SHORT).show()
         } else {
-            showBottomSheet(message = R.string.empty_password)
+            showBottomSheet(message = getString(R.string.empty_password))
         }
     }
 }

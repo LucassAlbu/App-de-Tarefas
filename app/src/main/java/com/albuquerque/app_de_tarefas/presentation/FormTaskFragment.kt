@@ -40,7 +40,7 @@ class FormTaskFragment : Fragment() {
         if (description.isNotEmpty()) {
 
         } else {
-            showBottomSheet(message = R.string.form_task_empty_description)
+            showBottomSheet(message = getString(R.string.form_task_empty_description))
 
         }
     }

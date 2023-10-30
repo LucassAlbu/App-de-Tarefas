@@ -53,13 +53,13 @@ class LoginFragment : Fragment() {
 
             } else {
                showBottomSheet(
-                  message = R.string.empty_password
+                  message = getString(R.string.empty_password)
                )
             }
 
         } else {
             showBottomSheet(
-                message = R.string.empty_email
+                message = getString(R.string.empty_email)
             )
         }
     }

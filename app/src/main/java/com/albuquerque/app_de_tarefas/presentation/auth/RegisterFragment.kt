@@ -45,10 +45,10 @@ class RegisterFragment : Fragment() {
             if (password.isNotEmpty()) {
                 Toast.makeText(requireContext(), "Deu Brasil", Toast.LENGTH_SHORT).show()
             } else {
-                showBottomSheet(message = R.string.empty_password)
+                showBottomSheet(message = getString(R.string.empty_password))
             }
         } else {
-            showBottomSheet(message = R.string.register_firebase_tv_invalid_email)
+            showBottomSheet(message = getString(R.string.register_firebase_tv_invalid_email))
         }
     }
 }
