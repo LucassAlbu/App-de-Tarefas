@@ -11,6 +11,10 @@
     <string name="password_hint">*********</string>
     <string name="cpf_text">CPF:</string>
     <string name="cpf_hint">999.999.999–99</string>
+    <string name="bottom_sheet_tv_warning">Atenção</string>
+    <string name="bottom_sheet_btn_warning">Entendi</string>
+    <string name="empty_email">Preencha seu E-mail</string>
+    <string name="empty_password">Preencha sua senha</string>
 
     <!-- TabLayout -->
     <string name="status_task_todo">A Fazer</string>
@@ -29,20 +33,9 @@
 
     <!-- Tela de Criação de cadastro-->
     <string name="register_firebase_btn_create_account_text">Criar Conta</string>
-    <string name="register_firebase_confirm_email_text">Confirme seu E-mail:</string>
-    <string name="register_firebase_invalid_cpf_text">Cpf invalido</string>
-    <string name="register_firebase_invalid_email_text">E-mail invalido</string>
-    <string name="register_firebase_emails_not_match_text">E-mails não conferem</string>
-    <string name="register_firebase_terms_and_conditions_text">Declaro que li e compreendi os termos e condições de uso.</string>
-    <string name="register_firebase_terms_and_conditions_dialog_text">É necessario concordar com os termos e condições de uso para se cadastrar </string>
-    <string name="register_firebase_user_name_text">Nome completo:</string>
-    <string name="register_firebase_user_name_hint">Seu nome completo</string>
-    <string name="register_firebase_error_register_account_creat_user_dialog_text"> Algum erro aconteceu ao cadastar seu usuario, verifique as informações inseridas!</string>
-    <string name="register_firebase_error_register_account_dialog_title">Falha ao cadastar</string>
-    <string name="register_firebase_tv_invalid_name_text">Digite seu nome</string>
-    <string name="register_firebase_birth_date_text">Data de Nascimento</string>
-    <string name="register_firebase_user_phone_text">Telefone</string>
-    <string name="register_firebase_btn_save_text">Salvar</string>
+    <string name="register_firebase_tv_invalid_email">Preencha um E-mail válido</string>
+    <string name="register_firebase_tv_empty_password">Preencha uma senha </string>
+
 
     <!-- Tela de Alteração de  senha -->
     <string name="change_password_current_password_text">Senha Atual:</string>
@@ -50,11 +43,16 @@
     <string name="change_password_btn_change_passowd_text">Alterar Senha</string>
     <string name="change_password_confirm_new_passowrd_text">Confirme sua senha</string>
     <string name="change_password_password_not_match_text">As senhas não estão iguais</string>
+
+
+<!--    Form Task Fragment-->
+
     <string name="form_tastk_description_task_text">Descrição da tarefa:</string>
     <string name="form_task_create_task_hint">Criar uma nova tarefa</string>
     <string name="form_task_todo_text_button">A Fazer</string>
     <string name="form_task_doing_text_button">Fazendo</string>
     <string name="form_task_done_text_button">Feito</string>
     <string name="form_task_save_button">Salvar</string>
+    <string name="form_task_empty_description">Preencha uma descrição para a tarefa</string>
 
 </resources>

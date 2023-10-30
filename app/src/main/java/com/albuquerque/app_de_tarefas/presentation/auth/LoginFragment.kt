@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.albuquerque.app_de_tarefas.R
 import com.albuquerque.app_de_tarefas.databinding.LoginFragmentBinding
+import com.albuquerque.app_de_tarefas.util.showBottomSheet
 
 
 class LoginFragment : Fragment() {
@@ -33,10 +35,32 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
         binding.btnEnter.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            validateData()
         }
         binding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_recoverPasswordFragment)
+        }
+    }
+
+    private fun validateData() {
+        val email = binding.edtEmail.text.toString().trim()
+        val password = binding.edtPassword.text.toString().trim()
+
+        if (email.isNotEmpty()) {
+            if (password.isNotEmpty()) {
+                Toast.makeText(requireContext(), "Deu Brasil", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+
+            } else {
+               showBottomSheet(
+                  message = R.string.empty_password
+               )
+            }
+
+        } else {
+            showBottomSheet(
+                message = R.string.empty_email
+            )
         }
     }
 }
