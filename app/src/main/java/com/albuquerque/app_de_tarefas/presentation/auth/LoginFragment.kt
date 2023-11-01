@@ -23,6 +23,8 @@ class LoginFragment : Fragment() {
 
         _binding = LoginFragmentBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

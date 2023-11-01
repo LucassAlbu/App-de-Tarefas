@@ -8,8 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -106,16 +105,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_to_do"
                 style="@style/custom_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
-                android:text="@string/form_task_todo_text_button" />
+                android:text="@string/form_task_todo_text_button"
+                android:textColorHighlight="@color/black" />
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_doing"
                 style="@style/custom_radio_button"
                 android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
                 android:layout_weight="1"
                 android:text="@string/form_task_doing_text_button" />
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_done"
                 style="@style/custom_radio_button"
                 android:layout_width="wrap_content"
@@ -138,6 +138,8 @@
             style="@style/buttonTheme"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/white"
@@ -153,13 +155,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:indeterminateTint="@color/white"
             android:progressTint="@color/white"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_save"
-            android:indeterminateTint="@color/white"/>
+            app:layout_constraintTop_toBottomOf="@+id/btn_save" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
