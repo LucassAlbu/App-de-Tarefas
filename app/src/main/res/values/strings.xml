@@ -59,4 +59,10 @@
     <string name="item_task_btn_edit">editar</string>
     <string name="item_task_btn_details">Detalhes</string>
 
+    <!-- Home Fragment-->
+
+    <string name="home_fragment_confirm_logout_title_dialog">Deseja sair da sua conta?</string>
+    <string name="home_fragment_confirm_logout_button_dialog">Confirmar</string>
+    <string name="home_fragment_confirm_logout_message_dialog">Aperte em confirmar para sair da sua conta.</string>
+
 </resources>
