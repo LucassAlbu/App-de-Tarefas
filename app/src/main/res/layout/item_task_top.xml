@@ -38,18 +38,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Criar tela para o app" />
 
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@color/transparent"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_Delete"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_Delete"
-                app:tint="@color/primaria02" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_Delete"
                 style="@style/buttonTheme"
@@ -101,17 +89,6 @@
                 app:layout_constraintStart_toEndOf="@+id/btn_edit"
                 app:layout_constraintTop_toTopOf="@+id/btn_edit" />
 
-            <ImageButton
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@color/transparent"
-                android:src="@drawable/ic_next"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_details"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_details"
-                app:tint="@color/primaria02" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -1,5 +1,6 @@
 package com.albuquerque.app_de_tarefas.util
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.albuquerque.app_de_tarefas.R
@@ -33,4 +34,12 @@ fun Fragment.showBottomSheet(
     bottomSheetDialog.setContentView(binding.root)
     bottomSheetDialog.show()
 
+}
+
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
 }
