@@ -10,11 +10,17 @@ import com.albuquerque.app_de_tarefas.R
 import com.albuquerque.app_de_tarefas.databinding.RecoverPasswordFragmentBinding
 import com.albuquerque.app_de_tarefas.util.initToolbar
 import com.albuquerque.app_de_tarefas.util.showBottomSheet
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class RecoverPasswordFragment : Fragment() {
 
     private var _binding: RecoverPasswordFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +32,8 @@ class RecoverPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar(binding.toolbar)
+        auth = Firebase.auth
+
         initClicks()
     }
 
@@ -40,9 +48,24 @@ class RecoverPasswordFragment : Fragment() {
 
 
         if (email.isNotEmpty()) {
-            Toast.makeText(requireContext(), "Tudo certo", Toast.LENGTH_SHORT).show()
+            recoverAccount(email)
         } else {
             showBottomSheet(message = getString(R.string.empty_password))
         }
+    }
+
+    private fun recoverAccount(email: String) {
+
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showBottomSheet(
+                        message = getString(R.string.recover_password_message),
+                    )
+                } else {
+                    Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
     }
 }

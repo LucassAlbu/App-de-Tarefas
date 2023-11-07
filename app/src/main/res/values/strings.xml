@@ -29,6 +29,7 @@
     <string name="recover_password_firebase_description_recover_password">Recupere sua senha digitando o email cadastrado abaixo. Você receberá um e-mail para criar uma nova senha.</string>
     <string name="recover_password_firebase_recover_password_text">Recuperar senha</string>
     <string name="recover_password_send_button_text">Enviar</string>
+    <string name="recover_password_message">Pronto, enviado para seu E-mail um link de recuperação de senha </string>
 
     <!-- Register Firebase Fragment-->
     <string name="register_firebase_btn_create_account_text">Criar Conta</string>

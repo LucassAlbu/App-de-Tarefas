@@ -9,13 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.albuquerque.app_de_tarefas.R
 import com.albuquerque.app_de_tarefas.databinding.LoginFragmentBinding
+import com.albuquerque.app_de_tarefas.util.gone
 import com.albuquerque.app_de_tarefas.util.showBottomSheet
+import com.albuquerque.app_de_tarefas.util.visible
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 
 class LoginFragment : Fragment() {
 
     private var _binding: LoginFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +36,9 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = Firebase.auth
+
         initClicks()
     }
 
@@ -50,13 +60,13 @@ class LoginFragment : Fragment() {
 
         if (email.isNotEmpty()) {
             if (password.isNotEmpty()) {
-                Toast.makeText(requireContext(), "Deu Brasil", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                binding.loading.visible()
+                loginUser(email, password)
 
             } else {
-               showBottomSheet(
-                  message = getString(R.string.empty_password)
-               )
+                showBottomSheet(
+                    message = getString(R.string.empty_password)
+                )
             }
 
         } else {
@@ -64,5 +74,20 @@ class LoginFragment : Fragment() {
                 message = getString(R.string.empty_email)
             )
         }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+
+                } else {
+                    binding.loading.gone()
+                    Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
     }
 }
