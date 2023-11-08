@@ -14,6 +14,8 @@
     <string name="bottom_sheet_btn_warning">Entendi</string>
     <string name="empty_email">Preencha seu E-mail</string>
     <string name="empty_password">Preencha sua senha</string>
+    <string name="error_generic">Ocorreu um erro, por favor tente novamente! </string>
+
 
     <!-- TabLayout -->
     <string name="status_task_todo">A Fazer</string>
@@ -54,6 +56,7 @@
     <string name="form_task_empty_description">Preencha uma descrição para a tarefa</string>
     <string name="form_task_tv_new_task">Nova tarefa</string>
     <string name="form_task_tv_status">Status</string>
+    <string name="form_task_save_success">Tarefa salva com sucesso </string>
 
      <!-- Item_Task -->
     <string name="item_task_btn_remove">Remover</string>
