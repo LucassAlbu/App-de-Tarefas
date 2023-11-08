@@ -15,6 +15,12 @@
     <string name="empty_email">Preencha seu E-mail</string>
     <string name="empty_password">Preencha sua senha</string>
     <string name="error_generic">Ocorreu um erro, por favor tente novamente! </string>
+    <string name="text_task_list_empty">Nenhuma tarefa cadastrada</string>
+    <string name="text_task_list_load">Aguarde, estamos carregando as informações</string>
+    <string name="text_delete_task_success">Tarefa removida com sucesso</string>
+    <string name="text_dialog_confirm">Confirmar</string>
+    <string name="text_title_dialog_delete">Deseja remover essa tarefa?</string>
+    <string name="text_message_dialog_delete">Aperte em confirmar para remover a tarefa</string>
 
 
     <!-- TabLayout -->
@@ -58,7 +64,7 @@
     <string name="form_task_tv_status">Status</string>
     <string name="form_task_save_success">Tarefa salva com sucesso </string>
 
-     <!-- Item_Task -->
+    <!-- Item_Task -->
     <string name="item_task_btn_remove">Remover</string>
     <string name="item_task_btn_edit">editar</string>
     <string name="item_task_btn_details">Detalhes</string>
@@ -66,7 +72,6 @@
     <!-- Home Fragment-->
 
     <string name="home_fragment_confirm_logout_title_dialog">Deseja sair da sua conta?</string>
-    <string name="home_fragment_confirm_logout_button_dialog">Confirmar</string>
     <string name="home_fragment_confirm_logout_message_dialog">Aperte em confirmar para sair da sua conta.</string>
 
 </resources>

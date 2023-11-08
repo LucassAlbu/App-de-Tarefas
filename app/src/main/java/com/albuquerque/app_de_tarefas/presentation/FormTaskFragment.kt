@@ -34,7 +34,6 @@ class FormTaskFragment : Fragment() {
     private var newTask: Boolean = true
 
     private lateinit var reference: DatabaseReference
-
     private lateinit var auth: FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

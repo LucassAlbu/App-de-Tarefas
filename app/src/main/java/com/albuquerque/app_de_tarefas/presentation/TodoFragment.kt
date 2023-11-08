@@ -7,14 +7,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.albuquerque.app_de_tarefas.R
 import com.albuquerque.app_de_tarefas.adapter.TaskAdapter
-import com.albuquerque.app_de_tarefas.adapter.TaskTopAdapter
 import com.albuquerque.app_de_tarefas.data.models.Status
 import com.albuquerque.app_de_tarefas.data.models.Task
 import com.albuquerque.app_de_tarefas.databinding.TodoFragmentBinding
+import com.albuquerque.app_de_tarefas.util.gone
+import com.albuquerque.app_de_tarefas.util.showBottomSheet
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 
 class TodoFragment : Fragment() {
 
@@ -22,7 +30,11 @@ class TodoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var taskAdapter: TaskAdapter
-    private lateinit var taskTopAdapter: TaskTopAdapter
+
+    private lateinit var reference: DatabaseReference
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +48,9 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth
+        reference = Firebase.database.reference
+
         initClicks()
         initRecyclerView()
         getTasks()
@@ -46,32 +61,32 @@ class TodoFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        taskTopAdapter = TaskTopAdapter() { task, option ->
-            optionSelected(task, option)
 
-        }
         taskAdapter = TaskAdapter(requireContext()) { task, option ->
             optionSelected(task, option)
 
         }
 
-        val concatAdapter = ConcatAdapter(taskTopAdapter, taskAdapter)
+
 
         with(binding.rvTasks) {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            adapter = concatAdapter
+            adapter = taskAdapter
         }
     }
 
     private fun optionSelected(task: Task, option: Int) {
         when (option) {
             TaskAdapter.SELECT_REMOVE -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Removendo ${task.description} ",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showBottomSheet(
+                    titleDialog = R.string.text_title_dialog_delete,
+                    titleButton = R.string.text_dialog_confirm,
+                    message = getString(R.string.text_message_dialog_delete),
+                    onClick = {
+                        deleteTask(task)
+                    }
+                )
             }
 
             TaskAdapter.SELECT_EDIT -> {
@@ -105,20 +120,59 @@ class TodoFragment : Fragment() {
     }
 
     private fun getTasks() {
-        val taskTopList = listOf(
-            Task("0", "Tarefa no topo", Status.TODO),
-            Task("1", "Concat Adapter", Status.TODO),
-        )
-        val taskList = listOf(
-            Task("0", "Criar uma nova tela pro App", Status.TODO),
-            Task("1", "Validar navegação", Status.TODO),
-            Task("2", "Adicionar animação", Status.TODO),
-            Task("3", "Salvar dados localmente", Status.TODO),
-            Task("4", "Configurar logout do app", Status.TODO),
-            Task("5", "Alterar cor da tela de login", Status.TODO),
-        )
-        taskTopAdapter.submitList(taskTopList)
-        taskAdapter.submitList(taskList)
+        reference
+            .child("tasks")
+            .child(auth.currentUser?.uid ?: "")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val taskList = mutableListOf<Task>()
+                    for (ds in snapshot.children) {
+                        val task = ds.getValue(Task::class.java) as Task
+                        if (task.status == Status.TODO) {
+                            taskList.add(task)
+                        }
+                    }
+                    binding.loading.gone()
+                    listEmpty(taskList)
+
+                    taskList.reverse()
+                    taskAdapter.submitList(taskList)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+            })
+    }
+
+    private fun deleteTask(task: Task) {
+        reference
+            .child("tasks")
+            .child(auth.currentUser?.uid ?: "")
+            .child(task.id)
+            .removeValue().addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.text_delete_task_success,
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+    }
+
+    private fun listEmpty(taskList: List<Task>) {
+        binding.tvTextInfo.text = if (taskList.isEmpty()) {
+            getString(R.string.text_task_list_empty)
+        } else {
+            ""
+        }
     }
 
 }
