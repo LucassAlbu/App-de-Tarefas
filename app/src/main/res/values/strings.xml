@@ -63,6 +63,7 @@
     <string name="form_task_tv_new_task">Nova tarefa</string>
     <string name="form_task_tv_status">Status</string>
     <string name="form_task_save_success">Tarefa salva com sucesso </string>
+    <string name="form_task_toolbar_title_update">Editando Tarefa</string>
 
     <!-- Item_Task -->
     <string name="item_task_btn_remove">Remover</string>

@@ -66,5 +66,10 @@
         android:id="@+id/formTaskFragment"
         android:name="com.albuquerque.app_de_tarefas.presentation.FormTaskFragment"
         android:label="form_task_fragment"
-        tools:layout="@layout/form_task_fragment" />
+        tools:layout="@layout/form_task_fragment" >
+        <argument
+            android:name="task"
+            app:argType="com.albuquerque.app_de_tarefas.data.models.Task"
+            app:nullable="true" />
+    </fragment>
 </navigation>

@@ -1,9 +1,10 @@
-package com.albuquerque.app_de_tarefas
+package com.albuquerque.app_de_tarefas.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.albuquerque.app_de_tarefas.R
 import com.albuquerque.app_de_tarefas.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

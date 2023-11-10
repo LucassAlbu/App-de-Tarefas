@@ -57,7 +57,11 @@ class TodoFragment : Fragment() {
     }
 
     private fun initClicks() {
-        binding.fbNewTask.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment) }
+        binding.fbNewTask.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToFormTaskFragment(null)
+            findNavController().navigate(action)
+        }
     }
 
     private fun initRecyclerView() {
@@ -90,11 +94,9 @@ class TodoFragment : Fragment() {
             }
 
             TaskAdapter.SELECT_EDIT -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Editando ${task.description} ",
-                    Toast.LENGTH_SHORT
-                ).show()
+             val action = HomeFragmentDirections
+                 .actionHomeFragmentToFormTaskFragment(task)
+                findNavController().navigate(action)
 
             }
 

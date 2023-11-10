@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.albuquerque.app_de_tarefas.R
 import com.albuquerque.app_de_tarefas.data.models.Status
 import com.albuquerque.app_de_tarefas.data.models.Task
@@ -27,12 +28,13 @@ class FormTaskFragment : Fragment() {
     private var _binding: FormTaskFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var task: Task
-
     private var status: Status = Status.TODO
 
     private var newTask: Boolean = true
 
+    private val args: FormTaskFragmentArgs by navArgs()
+
+    private lateinit var task: Task
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
     override fun onCreateView(
@@ -48,7 +50,17 @@ class FormTaskFragment : Fragment() {
         auth = Firebase.auth
         reference = Firebase.database.reference
 
+        getArgs()
         initClicks()
+    }
+
+    private fun getArgs() {
+        args.task.let {
+            if (it != null) {
+                this.task = it
+                configTask()
+            }
+        }
     }
 
     private fun initClicks() {
@@ -65,13 +77,33 @@ class FormTaskFragment : Fragment() {
         }
     }
 
+    private fun configTask() {
+        newTask = false
+        status = task.status
+        binding.tvToolbar.setText(R.string.form_task_toolbar_title_update)
+        binding.edtDescription.setText(task.description)
+        setStatus()
+    }
+
+    private fun setStatus() {
+        binding.radioGroup.check(
+            when (task.status) {
+                Status.TODO -> R.id.rb_to_do
+                Status.DONE -> R.id.rb_done
+                Status.DOING -> R.id.rb_doing
+            }
+        )
+    }
+
     private fun validateData() {
         val description = binding.edtDescription.text.toString().trim()
         if (description.isNotEmpty()) {
 
             binding.loading.visible()
-            if (newTask) task = Task()
-            task.id = reference.database.reference.push().key ?: ""
+            if (newTask) {
+                task = Task()
+                task.id = reference.database.reference.push().key ?: ""
+            }
             task.description = description
             task.status = status
             saveTask()
@@ -93,9 +125,9 @@ class FormTaskFragment : Fragment() {
                         R.string.form_task_save_success,
                         Toast.LENGTH_SHORT
                     ).show()
-                    if (newTask){
+                    if (newTask) {
                         findNavController().popBackStack()
-                    }else{
+                    } else {
                         binding.loading.gone()
                     }
 
